@@ -9,15 +9,23 @@ const profInfo = [
     { name: 'Md Ashikul Alam', roll: '4430' },
     { name: 'Md Junayedul Alam', roll: '4880' },
     { name: 'Md Zayanul Alam', roll: '4438' },
+    { name: 'Md Shakil', roll: '4438' },
+    { name: 'Md Anwar Ali', roll: '4438' },
 ];
 function App() {
     return (
         <div style={style}>
-            <Profile info={profInfo[0]} />
+            {/* conventional */}
+            {/* <Profile info={profInfo[0]} />
             <Profile info={profInfo[1]} />
             <Profile info={profInfo[2]} />
             <Profile info={profInfo[3]} />
-            <Profile info={profInfo[4]} />
+            <Profile info={profInfo[4]} /> */}
+
+            {/* Dynamic Way Using Map */}
+            {profInfo.map((pd) => (
+                <Profile info={pd} />
+            ))}
         </div>
     );
 }
