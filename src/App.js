@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 /* eslint-disable react/destructuring-assignment */
 const style = {
     padding: '10px',
@@ -10,11 +12,14 @@ const profInfo = [
     { name: 'Md Junayedul Alam', roll: '4880' },
     { name: 'Md Zayanul Alam', roll: '4438' },
     { name: 'Md Shakil', roll: '4438' },
-    { name: 'Md Anwar Ali', roll: '4438' },
+    { name: 'Md Anwar Ali', roll: '4778' },
+    { name: 'Md Abdur Rahman', roll: '7388' },
+    { name: 'Md Fawzul Karim', roll: '4656' },
 ];
 function App() {
     return (
         <div style={style}>
+            <Counter />
             {/* conventional */}
             {/* <Profile info={profInfo[0]} />
             <Profile info={profInfo[1]} />
@@ -26,6 +31,30 @@ function App() {
             {profInfo.map((pd) => (
                 <Profile info={pd} />
             ))}
+        </div>
+    );
+}
+
+// Button increase and decrease function method
+function Counter() {
+    const [count, setCount] = useState(0);
+    const increaseCount = () => setCount(count + 1);
+    const decreaseCount = () => setCount(count - 1);
+    return (
+        <div>
+            <h1>Count: {count}</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias ab cum doloribus
+                illum temporibus ipsam?
+            </p>
+            <button onClick={increaseCount} type="button" style={{ margin: '5px' }}>
+                {' '}
+                Increase{' '}
+            </button>
+            <button onClick={decreaseCount} type="button">
+                {' '}
+                Decrease{' '}
+            </button>
         </div>
     );
 }
