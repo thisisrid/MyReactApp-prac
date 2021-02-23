@@ -56,7 +56,7 @@ function CallApi() {
         fetch('https://jsonplaceholder.typicode.com/users')
             .then((res) => res.json())
             .then((data) => setUsers(data));
-    });
+    }, []);
 
     return (
         <div style={{ height: '350px' }}>
