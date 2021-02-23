@@ -1,9 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /* eslint-disable react/destructuring-assignment */
 const style = {
     padding: '10px',
     margin: '20px',
+    backgroundColor: 'whitesmoke',
+};
+const profileStyle = {
+    padding: '10px',
+    margin: '8px',
+    border: '2px solid grey',
+    borderRadius: '10px',
+    backgroundColor: 'lightGrey',
+    boxShadow: '10px 5px 10px',
+    width: '250px',
+    height: '300px',
+    float: 'left',
 };
 const profInfo = [
     { name: 'Md Ridwanul Alam', roll: '2902' },
@@ -19,6 +31,7 @@ const profInfo = [
 function App() {
     return (
         <div style={style}>
+            <CallApi />
             <Counter />
             {/* conventional */}
             {/* <Profile info={profInfo[0]} />
@@ -35,6 +48,38 @@ function App() {
     );
 }
 
+// Api Call and making dynamic div
+function CallApi() {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then((res) => res.json())
+            .then((data) => setUsers(data));
+    });
+
+    return (
+        <div style={{ height: '350px' }}>
+            <h2>Total Users: {users.length}</h2>
+            {users.map((user) => (
+                <div
+                    style={{
+                        border: '2px solid black',
+                        margin: '5px',
+                        padding: '5px',
+                        float: 'left',
+                        borderRadius: '10px',
+                        backgroundColor: 'lightGrey',
+                        boxShadow: '10px 5px 10px',
+                    }}
+                >
+                    <h5>Name: {user.name}</h5>
+                    <h5>Email: {user.email}</h5>
+                </div>
+            ))}
+        </div>
+    );
+}
 // Button increase and decrease function method
 function Counter() {
     const [count, setCount] = useState(0);
@@ -60,17 +105,6 @@ function Counter() {
 }
 
 function Profile(props) {
-    const profileStyle = {
-        padding: '10px',
-        margin: '8px',
-        border: '2px solid grey',
-        borderRadius: '10px',
-        backgroundColor: 'lightGrey',
-        boxShadow: '10px 5px 10px',
-        width: '250px',
-        height: '300px',
-        float: 'left',
-    };
     const { name, roll } = props.info;
 
     return (
