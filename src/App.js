@@ -2,22 +2,28 @@
 import { useEffect, useState } from 'react';
 
 /* eslint-disable react/destructuring-assignment */
-const style = {
+const bodyStyle = {
     padding: '10px',
-    margin: '20px',
+    // margin: '0 auto',
     backgroundColor: 'whitesmoke',
+};
+const imageStyle = {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    border: '3px solid black',
+    borderRadius: '50%',
 };
 const profileStyle = {
     padding: '10px',
-    margin: '8px auto',
+    margin: '10px',
     border: '2px solid grey',
     borderRadius: '10px',
     backgroundColor: 'lightGrey',
     boxShadow: '10px 5px 10px',
     width: '300px',
-    height: '400px',
-    float: 'left',
-    // overflow: 'scroll',
+    display: 'inline-grid',
+    gridTemplateColumns: 'auto auto auto',
 };
 const profInfo = [
     { name: 'Md Ridwanul Alam', roll: '2902' },
@@ -32,18 +38,11 @@ const profInfo = [
 ];
 function App() {
     return (
-        <div style={style}>
+        <div style={bodyStyle}>
             <Counter />
             <Users />
 
             <CallApi />
-
-            {/* conventional */}
-            {/* <Profile info={profInfo[0]} />
-            <Profile info={profInfo[1]} />
-            <Profile info={profInfo[2]} />
-            <Profile info={profInfo[3]} />
-            <Profile info={profInfo[4]} /> */}
 
             {/* Dynamic Way Using Map */}
             {profInfo.map((pd) => (
@@ -57,21 +56,23 @@ function App() {
 function Users() {
     const [user, setUser] = useState([]);
     useEffect(() => {
-        fetch('https://randomuser.me/api/?results=18')
+        fetch('https://randomuser.me/api/?results=24')
             .then((res) => res.json())
             .then((data) => setUser(data.results));
     }, []);
     return user.map((element) => (
         <div style={profileStyle}>
-            <img src={element.picture.large} alt="image" />
-            <h4>
-                Name: {element.name.title} {element.name.first} {element.name.last}
-            </h4>
-            <p>ID: {element.id.value}</p>
-            <p>Email: {element.email}</p>
-            <p>Country: {element.location.country}</p>
-            <p>City: {element.location.city}</p>
-            <p>Gender: {element.gender}</p>
+            <div>
+                <img style={imageStyle} src={element.picture.large} alt="image" />
+                <h4>
+                    Name: {element.name.title} {element.name.first} {element.name.last}
+                </h4>
+                <p>Cell Phone: {element.cell}</p>
+                <small>Email: {element.email}</small>
+                <p>Country: {element.location.country}</p>
+                <p>City: {element.location.city}</p>
+                <p>Gender: {element.gender}</p>
+            </div>
         </div>
     ));
 }
@@ -87,23 +88,15 @@ function CallApi() {
     }, []);
 
     return (
-        <div style={{ height: '350px' }}>
+        <div>
             <h2>Total Users: {users.length}</h2>
+
             {users.map((user) => (
-                <div
-                    style={{
-                        border: '2px solid black',
-                        margin: '5px',
-                        padding: '5px',
-                        width: '300px',
-                        float: 'left',
-                        borderRadius: '10px',
-                        backgroundColor: 'lightGrey',
-                        boxShadow: '10px 5px 10px',
-                    }}
-                >
-                    <h5>Name: {user.name}</h5>
-                    <h5>Email: {user.email}</h5>
+                <div style={profileStyle}>
+                    <div>
+                        <h5>Name: {user.name}</h5>
+                        <h5>Email: {user.email}</h5>
+                    </div>
                 </div>
             ))}
         </div>
@@ -138,22 +131,24 @@ function Profile(props) {
 
     return (
         <div style={profileStyle}>
-            <h3>Name: {name}</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae ullam expedita quam
-                natus iusto, magnam magni consequatur eveniet eum qui.
-            </p>
-            <small
-                style={{
-                    display: 'inline-block',
-                    border: '3px solid red',
-                    padding: '3px',
-                    marginBottom: '3px',
-                }}
-            >
-                Roll: {roll}
-            </small>
-            <br /> <button type="button"> Go To Profile </button>
+            <div>
+                <h3>Name: {name}</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae ullam expedita
+                    quam natus iusto, magnam magni consequatur eveniet eum qui.
+                </p>
+                <small
+                    style={{
+                        display: 'inline-block',
+                        border: '3px solid red',
+                        padding: '3px',
+                        marginBottom: '3px',
+                    }}
+                >
+                    Roll: {roll}
+                </small>
+                <br /> <button type="button"> Go To Profile </button>
+            </div>
         </div>
     );
 }
