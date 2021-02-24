@@ -1,4 +1,4 @@
-live site: https://thisisrid.github.io/MyReactApp-prac 
+live site: https://thisisrid.github.io/MyReactApp-prac/ 
 
 # Getting Started with Create React App
 
