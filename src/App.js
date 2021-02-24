@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from 'react';
 
 /* eslint-disable react/destructuring-assignment */
@@ -8,14 +9,15 @@ const style = {
 };
 const profileStyle = {
     padding: '10px',
-    margin: '8px',
+    margin: '8px auto',
     border: '2px solid grey',
     borderRadius: '10px',
     backgroundColor: 'lightGrey',
     boxShadow: '10px 5px 10px',
-    width: '250px',
-    height: '300px',
+    width: '300px',
+    height: '400px',
     float: 'left',
+    // overflow: 'scroll',
 };
 const profInfo = [
     { name: 'Md Ridwanul Alam', roll: '2902' },
@@ -31,8 +33,11 @@ const profInfo = [
 function App() {
     return (
         <div style={style}>
-            <CallApi />
             <Counter />
+            <Users />
+
+            <CallApi />
+
             {/* conventional */}
             {/* <Profile info={profInfo[0]} />
             <Profile info={profInfo[1]} />
@@ -46,6 +51,29 @@ function App() {
             ))}
         </div>
     );
+}
+
+// another api parctice
+function Users() {
+    const [user, setUser] = useState([]);
+    useEffect(() => {
+        fetch('https://randomuser.me/api/?results=18')
+            .then((res) => res.json())
+            .then((data) => setUser(data.results));
+    }, []);
+    return user.map((element) => (
+        <div style={profileStyle}>
+            <img src={element.picture.large} alt="image" />
+            <h4>
+                Name: {element.name.title} {element.name.first} {element.name.last}
+            </h4>
+            <p>ID: {element.id.value}</p>
+            <p>Email: {element.email}</p>
+            <p>Country: {element.location.country}</p>
+            <p>City: {element.location.city}</p>
+            <p>Gender: {element.gender}</p>
+        </div>
+    ));
 }
 
 // Api Call and making dynamic div
@@ -67,6 +95,7 @@ function CallApi() {
                         border: '2px solid black',
                         margin: '5px',
                         padding: '5px',
+                        width: '300px',
                         float: 'left',
                         borderRadius: '10px',
                         backgroundColor: 'lightGrey',
