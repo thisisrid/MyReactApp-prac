@@ -2,6 +2,7 @@
   "name": "myreactapp",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://thisisrid.github.io/MyReactApp-prac/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -16,7 +17,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "yarn add -D prettier && yarn add -D babel-eslint && npx install-peerdeps --dev eslint-config-airbnb && yarn add -D eslint-config-prettier eslint-plugin-prettier"
+    "lint": "yarn add -D prettier && yarn add -D babel-eslint && npx install-peerdeps --dev eslint-config-airbnb && yarn add -D eslint-config-prettier eslint-plugin-prettier",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +49,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "7.21.5",
     "eslint-plugin-react-hooks": "1.7.0",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.2.1"
   }
 }
